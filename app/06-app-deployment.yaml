@@ -1,0 +1,36 @@
+#06-app-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zouzoublique-api
+  namespace: zouzou-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: zouzoublique-api
+  template:
+    metadata:
+      labels:
+        app: zouzoublique-api
+    spec:
+      containers:
+        - name: zouzoublique-api
+          image: docker.io/operations42/zouzoublique-api:v1
+          ports:
+            - containerPort: 3000
+            #- containerPort: 8080
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/zouzoublique-api
+      volumes:
+        - name: config-volume
+          configMap:
+            name: zouzoublique-config
+            

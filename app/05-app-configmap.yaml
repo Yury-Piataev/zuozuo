@@ -1,0 +1,11 @@
+#05-app-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zouzoublique-config
+  namespace: zouzou-ns
+data:
+  config.ini: |
+    [main]
+    database_url = postgres://postgres:$(POSTGRES_PASSWORD)@postgres.zouzoublique.svc.cluster.local:5432/postgres?sslmode=disable
+    port = 3000
