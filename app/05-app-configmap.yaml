@@ -7,5 +7,5 @@ metadata:
 data:
   config.ini: |
     [main]
-    database_url = postgres://postgres:$(POSTGRES_PASSWORD)@postgres.zouzoublique.svc.cluster.local:5432/postgres?sslmode=disable
+    database_url = postgres://postgres:$(POSTGRES_PASSWORD)@postgres.zouzou-ns.svc.cluster.local:5432/postgres?sslmode=disable
     port = 3000
